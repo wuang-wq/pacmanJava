@@ -8,7 +8,7 @@ public class Intro{
     JButton Start;
     JButton Exit;
     Intro(){
-        //set up panel
+        //set up panels
         introPanel = new JPanel(null);
         introPanel.setSize(615, 615);
         introPanel.setOpaque(true);
