@@ -1,49 +1,59 @@
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class MyFrame extends JFrame implements ActionListener {
-    JLayeredPane mixMap;
-    //Tạo các object để sử dụng các panel ,button,... trong class khác
-    Intro intro=new Intro();
-    Trailer trailer=new Trailer();
-    FirstMap firstMap=new FirstMap();
-    SecondMap secondMap=new SecondMap();
-    ThirdMap thirdMap=new ThirdMap();
+    JPanel cardPanel;  // Use JPanel instead of JLayeredPane
+    Intro intro = new Intro();
+    Trailer trailer = new Trailer();
+    FirstMap firstMap = new FirstMap();
+    SecondMap secondMap = new SecondMap();
+    ThirdMap thirdMap = new ThirdMap();
 
+    CardLayout cardLayout = new CardLayout();
 
-    MyFrame(){
-        //setup trộn giữa các trang
-        mixMap=new JLayeredPane();
-        mixMap.setBounds(0, 0, 615, 615);
-        mixMap.add(thirdMap.thirdMapPanel);
-        mixMap.add(secondMap.secondMapPanel);
-        mixMap.add(firstMap.firstMapPanel);
-        mixMap.add(trailer.trailerPanel);
-        mixMap.add(intro.introPanel);
-        
-        
-        
-        // setup Jframe
-        ImageIcon logo=new ImageIcon("./picture/logo.jpg");
+    MyFrame() {
+        cardPanel = new JPanel();  // Use JPanel instead of JLayeredPane
+        cardPanel.setBounds(0, 0, 615, 615);
+
+        // Sử dụng CardLayout cho cardPanel
+        cardPanel.setLayout(cardLayout);
+
+        // Thêm các panel vào cardPanel với tên đặc biệt
+        cardPanel.add(thirdMap.thirdMapPanel, "ThirdMap");
+        cardPanel.add(secondMap.secondMapPanel, "SecondMap");
+        cardPanel.add(firstMap.firstMapPanel, "FirstMap");
+        cardPanel.add(trailer.trailerPanel, "Trailer");
+        cardPanel.add(intro.introPanel, "Intro");
+
+        // Thể hiện thẻ đầu tiên (ở đây là Intro)
+        cardLayout.show(cardPanel, "Intro");
+
+        ImageIcon logo = new ImageIcon("./picture/logo.jpg");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(615,615);
+        this.setSize(615, 615);
         this.setTitle("Journey to Adulthood");
         this.setIconImage(logo.getImage());
         this.setResizable(false);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
-        this.add(mixMap);
+        this.add(cardPanel);
+
+        // Thêm ActionListener cho nút "Start" trong Intro
+        intro.Start.addActionListener(this);
+
         this.setVisible(true);
     }
 
-
-
-    
-    // Code sự kiện nhấn nút
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        // Xử lý sự kiện khi nút "Start" được nhấn
+        if (e.getSource() == intro.Start) {
+            // Chuyển sang cửa sổ Trailer
+            cardLayout.show(cardPanel, "Trailer");
+        }
     }
-    
 }
