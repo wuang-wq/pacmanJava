@@ -24,7 +24,7 @@ public class MyFrame extends JFrame implements ActionListener {
         
         
         // setup Jframe
-        ImageIcon logo=new ImageIcon("./Picture/logo.jpg");
+        ImageIcon logo=new ImageIcon("./picture/logo.jpg");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(615,615);
         this.setTitle("Journey to Adulthood");
