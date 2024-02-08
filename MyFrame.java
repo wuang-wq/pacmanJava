@@ -44,7 +44,10 @@ public class MyFrame extends JFrame implements ActionListener {
 
         // Thêm ActionListener cho nút "Start" trong Intro
         intro.Start.addActionListener(this);
-
+        
+        // Thêm ActionListener cho nút "Exit" trong Intro
+        intro.Exit.addActionListener(this);
+        
         this.setVisible(true);
     }
 
@@ -54,6 +57,11 @@ public class MyFrame extends JFrame implements ActionListener {
         if (e.getSource() == intro.Start) {
             // Chuyển sang cửa sổ Trailer
             cardLayout.show(cardPanel, "Trailer");
+        }
+        // Xử lý sự kiện khi nút "Exit" được nhấn
+        else if (e.getSource() == intro.Exit) {
+            // Thoát ứng dụng
+            System.exit(0);
         }
     }
 }
