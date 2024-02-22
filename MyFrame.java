@@ -36,7 +36,6 @@ public class MyFrame extends JFrame implements ActionListener, Runnable {
 
     
     CardLayout cardLayout = new CardLayout();
-    
 
     MyFrame() {
 
@@ -50,7 +49,7 @@ public class MyFrame extends JFrame implements ActionListener, Runnable {
         cardPanel.add(thirdMap.thirdMapPanel, "ThirdMap");
         cardPanel.add(secondMap.secondMapPanel, "SecondMap");
         cardPanel.add(firstMap.firstMapPanel, "FirstMap");
-        cardPanel.add(trailer.trailerPanel, "Trailer");
+        cardPanel.add(trailer.getContentPane(), "Trailer");
         cardPanel.add(intro.introPanel, "Intro");
 
         // Thể hiện thẻ đầu tiên (ở đây là Intro)
@@ -64,11 +63,6 @@ public class MyFrame extends JFrame implements ActionListener, Runnable {
 
         // Thêm ActionListener cho nút "Exit" trong Intro
         intro.Exit.addActionListener(this);
-
-       
-      
-
-     
         
     }
     //Hàm setup các dữ liệu ban đầu của jframe
@@ -99,7 +93,10 @@ public class MyFrame extends JFrame implements ActionListener, Runnable {
             // Chuyển sang cửa sổ Trailer
             nameCardLayout = "Trailer";
             cardLayout.show(cardPanel, nameCardLayout);
-
+            trailer.timer.start();
+        }
+        else if(e.getSource() == trailer.skipButton){
+            cardLayout.show(cardPanel, "FirstMap");
         }
         // Xử lý sự kiện khi nút "Exit" được nhấn
         else if (e.getSource() == intro.Exit) {
@@ -159,6 +156,7 @@ public class MyFrame extends JFrame implements ActionListener, Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
         player.draw(g2);
+        
         g2.dispose();
     }
 
