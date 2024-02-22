@@ -9,12 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
-public class Trailer extends JFrame {
+public class Trailer  {
     JTextArea textArea;
     JButton nextButton;
     public JButton skipButton;
-    JPanel trailerPanel;
+   
     public Timer timer;
+    public JLayeredPane trailerPanel;
     String[] linesToShow = {
             "Bạn là học sinh cấp 2 vừa thi và đỗ vào trường cấp 3 mong muốn.",
             "Đầu tiên chúc mừng bạn đã đỗ vào ngôi trường mơ ước nhưng đừng chủ quan, vì lúc này đây sẽ là những bước đầu trên con đường trưởng thành của bạn.",
@@ -29,8 +30,8 @@ public class Trailer extends JFrame {
     int currentCharacterIndex = 0;
 
     public Trailer() {
-        JLayeredPane layeredPane = new JLayeredPane();
-        setContentPane(layeredPane);
+        trailerPanel= new JLayeredPane();
+        
 
         //set font
         textArea = new JTextArea();
@@ -105,16 +106,15 @@ public class Trailer extends JFrame {
         skipButton.setFont(font);
 
         // Thêm buttonPanel vào trailerPanel
-        trailerPanel = new JPanel();
-        trailerPanel.setLayout(null);
-         layeredPane.add(skipButton);
-        layeredPane.add(nextButton);
+        
+      trailerPanel.add(skipButton);
+      trailerPanel.add(nextButton);
 
-        layeredPane.add(textArea, JLayeredPane.DEFAULT_LAYER);
+      trailerPanel.add(textArea, JLayeredPane.DEFAULT_LAYER);
        
-        layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
+      trailerPanel.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
         
-        
+       
 
         nextButton.addActionListener(new ActionListener() {
             @Override
